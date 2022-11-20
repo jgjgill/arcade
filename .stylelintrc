@@ -1,0 +1,17 @@
+{
+  "extends": ["stylelint-config-recess-order", "stylelint-config-standard-scss"],
+  "rules": {
+    "color-function-notation": "legacy",
+    "color-hex-length": "long",
+    "color-hex-case": "upper",
+    "string-quotes": "single",
+    "custom-property-empty-line-before": null,
+    "block-no-empty": null,
+    "no-empty-source": null,
+    "selector-class-pattern": "^[a-z](|[a-zA-Z0-9]+)$",
+    "keyframes-name-pattern": "^[a-z][a-zA-Z0-9_]+$",
+    "scss/at-function-pattern": "^[a-z_](|[a-zA-Z0-9-]+)$",
+    "scss/at-mixin-pattern": "^[a-z_](|[a-zA-Z0-9]+)$",
+    "scss/dollar-variable-pattern": "^[A-Z0-9_]+$"
+  }
+}
