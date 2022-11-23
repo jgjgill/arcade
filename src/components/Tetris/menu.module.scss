@@ -1,3 +1,16 @@
-.container {}
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/neon';
 
-.button {}
+.container {
+}
+
+.button {
+  @include neon.text(colors.$PRIMARY);
+  @include neon.border(colors.$PRIMARY);
+
+  padding: 15px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: colors.$BLACK;
+  transition: 0.3s;
+}

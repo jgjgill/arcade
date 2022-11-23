@@ -6,15 +6,20 @@ const useGameStats = (rowsCleared: number) => {
   const [rows, setRows] = useState(0)
   const [level, setLevel] = useState(1)
 
+  const resetGameStats = () => {
+    setScore(0)
+    setRows(0)
+    setLevel(1)
+  }
+
   useEffect(() => {
     if (!rowsCleared) return
 
-    console.log(rowsCleared)
     setScore((prev) => prev + CLEAR_ROW_POINTS[rowsCleared - 1] * level)
     setRows((prev) => prev + rowsCleared)
   }, [rowsCleared, level])
 
-  return { score, setScore, rows, setRows, level, setLevel }
+  return { score, rows, level, resetGameStats }
 }
 
 export default useGameStats

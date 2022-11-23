@@ -18,7 +18,7 @@ function App() {
 
   const { player, updatePlayerPos, resetPlayer, rotatePlayer } = usePlayer()
   const { board, setBoard, rowsCleared } = useBoard({ player, resetPlayer })
-  const { score, setScore, rows, setRows, level, setLevel } = useGameStats(rowsCleared)
+  const { score, rows, level, resetGameStats } = useGameStats(rowsCleared)
 
   const handleClickStartGame = () => {
     if (!gameArea.current) return
@@ -26,10 +26,8 @@ function App() {
     gameArea.current.focus()
     setBoard(buildBoard())
     setDropTime(1000)
-    setScore(0)
-    setRows(0)
-    setLevel(1)
     setGameOver(false)
+    resetGameStats()
     resetPlayer()
   }
 
@@ -49,28 +47,20 @@ function App() {
 
   const move = ({ keyCode, repeat }: { keyCode: number; repeat: boolean }) => {
     if (gameOver) return
+    if (keyCode < 37 || keyCode > 40) return
 
-    // left
-    if (keyCode === 37) {
-      movePlayer(-1)
+    // 37: left, 39: right, 40: down, 38: up
+    const keyCodeFunc: Record<number, () => void> = {
+      37: () => movePlayer(-1),
+      39: () => movePlayer(1),
+      40: () => {
+        if (repeat) return
+        setDropTime(30)
+      },
+      38: () => rotatePlayer(board),
     }
 
-    // right
-    if (keyCode === 39) {
-      movePlayer(1)
-    }
-
-    // down
-    if (keyCode === 40) {
-      if (repeat) return
-
-      setDropTime(20)
-    }
-
-    // up
-    if (keyCode === 38) {
-      rotatePlayer(board)
-    }
+    keyCodeFunc[keyCode]()
   }
 
   const drop = () => {
@@ -98,11 +88,7 @@ function App() {
       ref={gameArea}
       onKeyDown={move}
       onKeyUp={keyUp}
-      style={{
-        display: 'flex',
-        gap: '10px',
-        height: '100vh',
-      }}
+      style={{ display: 'flex', gap: '10px', height: '100vh' }}
     >
       <Board board={board} />
       {gameOver && <Menu onClick={handleClickStartGame} />}
