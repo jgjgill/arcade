@@ -4,6 +4,7 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [react()],
+  base: 'arcade',
   resolve: {
     alias: [
       { find: '@src', replacement: resolve(__dirname, 'src') },
