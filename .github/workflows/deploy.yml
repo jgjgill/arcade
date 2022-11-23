@@ -20,7 +20,7 @@ jobs:
           node-version: 16
 
       - name: Install dependencies
-        uses: yarn add
+        uses: borales/actions-yarn@v3.0.0
 
       - name: Build project
         run: yarn build
