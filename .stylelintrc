@@ -6,12 +6,13 @@
     "color-hex-case": "upper",
     "string-quotes": "single",
     "custom-property-empty-line-before": null,
+    "scss/dollar-variable-empty-line-before": null,
     "block-no-empty": null,
     "no-empty-source": null,
-    "selector-class-pattern": "^[a-z](|[a-zA-Z0-9]+)$",
-    "keyframes-name-pattern": "^[a-z][a-zA-Z0-9_]+$",
+    "selector-class-pattern": "^[a-z_](|[a-zA-Z0-9-]+)$",
+    "keyframes-name-pattern": "^[a-z][a-zA-Z0-9-]+$",
     "scss/at-function-pattern": "^[a-z_](|[a-zA-Z0-9-]+)$",
-    "scss/at-mixin-pattern": "^[a-z_](|[a-zA-Z0-9]+)$",
+    "scss/at-mixin-pattern": "^[a-z_](|[a-zA-Z0-9-]+)$",
     "scss/dollar-variable-pattern": "^[A-Z0-9_]+$"
   }
 }
