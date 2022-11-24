@@ -2,13 +2,14 @@ import Board from '@components/Tetris/Board'
 import GameStats from '@components/Tetris/GameStats'
 import Menu from '@components/Tetris/Menu'
 import PreviewList from '@components/Tetris/PreviewList'
+import useBoard from '@hooks/useBoard'
+import useGameStats from '@hooks/useGameStats'
+import useInterval from '@hooks/useInterval'
 import usePlayer from '@hooks/usePlayer'
-import { useRef, useState } from 'react'
+import { isColliding } from '@utils/tetris'
+import { useEffect, useRef, useState } from 'react'
 
-import useBoard from './hooks/useBoard'
-import useGameStats from './hooks/useGameStats'
-import useInterval from './hooks/useInterval'
-import { buildBoard, isColliding } from './utils/tetris'
+import usePreview from './hooks/usePreview'
 
 function App() {
   const [dropTime, setDropTime] = useState<null | number>(null)
@@ -16,19 +17,32 @@ function App() {
 
   const gameArea = useRef<HTMLDivElement>(null)
 
-  const { player, updatePlayerPos, resetPlayer, rotatePlayer } = usePlayer()
-  const { board, setBoard, rowsCleared } = useBoard({ player, resetPlayer })
+  const { previewList, resetPreview, removeFirstPreview, addPreview, firstPreview } =
+    usePreview()
+
+  const { player, updatePlayerPos, firstPlayer, resetPlayer, rotatePlayer } =
+    usePlayer(firstPreview)
+
+  const { board, resetBoard, rowsCleared } = useBoard({
+    player,
+    resetPlayer,
+    removeFirstPreview,
+  })
+
   const { score, rows, level, resetGameStats } = useGameStats(rowsCleared)
 
   const handleClickStartGame = () => {
     if (!gameArea.current) return
 
     gameArea.current.focus()
-    setBoard(buildBoard())
     setDropTime(1000)
     setGameOver(false)
+
+    resetBoard()
     resetGameStats()
-    resetPlayer()
+    resetPreview()
+
+    firstPlayer()
   }
 
   const movePlayer = (dir: number) => {
@@ -65,17 +79,23 @@ function App() {
 
   const drop = () => {
     if (isColliding({ player, board, moveX: 0, moveY: 1 })) {
-      if (player.pos.y < 1) {
-        console.log('game over!')
-        setGameOver(true)
-        setDropTime(null)
-      }
-
+      addPreview()
       updatePlayerPos({ x: 0, y: 0, collided: true })
     } else {
       updatePlayerPos({ x: 0, y: 1, collided: false })
     }
   }
+
+  useEffect(() => {
+    if (!player.pos) return
+
+    if (isColliding({ player, board, moveX: 0, moveY: 1 })) {
+      if (player.pos.y < 1) {
+        setGameOver(true)
+        setDropTime(null)
+      }
+    }
+  }, [player, board])
 
   useInterval(() => {
     drop()
@@ -93,7 +113,7 @@ function App() {
       <Board board={board} />
       {gameOver && <Menu onClick={handleClickStartGame} />}
       <GameStats score={score} rows={rows} level={level} />
-      {/* <PreviewList tetrominoes={[1, 2, 3]} /> */}
+      <PreviewList tetrominoes={previewList} />
     </div>
   )
 }

@@ -33,6 +33,7 @@ export const rotate = (matrix: Player['tetromino']) => {
 }
 
 export const isColliding = ({ player, board, moveX, moveY }: IsColliding) => {
+  // console.log(player.pos)
   for (let y = 0; y < player.tetromino.length; y++) {
     for (let x = 0; x < player.tetromino[y].length; x++) {
       // 해당 테트로미노 칸이 빈칸이면 생략
@@ -46,8 +47,9 @@ export const isColliding = ({ player, board, moveX, moveY }: IsColliding) => {
         !board[currentY] ||
         !board[currentY][currentX] ||
         board[currentY][currentX][1] !== 'clear'
-      )
+      ) {
         return true
+      }
     }
   }
 
@@ -58,24 +60,24 @@ export const TETROMINOS: Record<TetrominosKey, { shape: TetrominoShape }> = {
   0: { shape: [[0]] },
   I: {
     shape: [
-      [0, 'I', 0, 0],
-      [0, 'I', 0, 0],
-      [0, 'I', 0, 0],
-      [0, 'I', 0, 0],
+      [0, 0, 0, 0],
+      ['I', 'I', 'I', 'I'],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
     ],
   },
   J: {
     shape: [
-      [0, 'J', 0],
-      [0, 'J', 0],
-      ['J', 'J', 0],
+      ['J', 0, 0],
+      ['J', 'J', 'J'],
+      [0, 0, 0],
     ],
   },
   L: {
     shape: [
-      [0, 'L', 0],
-      [0, 'L', 0],
-      [0, 'L', 'L'],
+      [0, 0, 'L'],
+      ['L', 'L', 'L'],
+      [0, 0, 0],
     ],
   },
   O: {
@@ -93,9 +95,9 @@ export const TETROMINOS: Record<TetrominosKey, { shape: TetrominoShape }> = {
   },
   T: {
     shape: [
-      [0, 0, 0],
-      ['T', 'T', 'T'],
       [0, 'T', 0],
+      ['T', 'T', 'T'],
+      [0, 0, 0],
     ],
   },
   Z: {

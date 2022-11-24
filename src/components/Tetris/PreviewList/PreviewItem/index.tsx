@@ -1,11 +1,32 @@
 import styles from '@components/Tetris/PreviewList/PreviewItem/previewItem.module.scss'
+import { cx } from '@styles/index'
+
+import type { TetrominoShape } from '@@types/tetris'
 
 interface Props {
-  tetromino: any
+  tetromino: TetrominoShape
 }
 
 const PreviewItem = ({ tetromino }: Props) => {
-  return <li>{tetromino}</li>
+  return (
+    <li>
+      <div className={styles.temp}>
+        {tetromino.map((row, index) => {
+          const key = `row-${index}`
+          return (
+            <div key={key} className={styles.ttt}>
+              {row.map((cell, index) => {
+                const key = `${cell}-${index}`
+                return (
+                  <div key={key} className={cx(styles.cell, styles[`cell-${cell}`])} />
+                )
+              })}
+            </div>
+          )
+        })}
+      </div>
+    </li>
+  )
 }
 
 export default PreviewItem

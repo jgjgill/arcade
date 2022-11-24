@@ -1,7 +1,7 @@
 import { isColliding, randomTetromino, rotate } from '@src/utils/tetris'
 import { useCallback, useState } from 'react'
 
-import type { Board, Player } from '@@types/tetris'
+import type { Board, Player, TetrominoShape } from '@@types/tetris'
 
 interface UpdatePlayer {
   x: number
@@ -9,7 +9,7 @@ interface UpdatePlayer {
   collided: boolean
 }
 
-const usePlayer = () => {
+const usePlayer = (firstPreview: TetrominoShape) => {
   const [player, setPlayer] = useState({} as Player)
 
   const updatePlayerPos = ({ x, y, collided }: UpdatePlayer) => {
@@ -20,13 +20,21 @@ const usePlayer = () => {
     }))
   }
 
-  const resetPlayer = useCallback(() => {
+  const firstPlayer = () => {
     setPlayer({
-      pos: { x: 10 / 2 - 2, y: 0 },
+      pos: { x: 10 / 2, y: 0 },
       tetromino: randomTetromino().shape,
       collided: false,
     })
-  }, [])
+  }
+
+  const resetPlayer = useCallback(() => {
+    setPlayer({
+      pos: { x: 10 / 2, y: 0 },
+      tetromino: firstPreview,
+      collided: false,
+    })
+  }, [firstPreview])
 
   const rotatePlayer = (board: Board) => {
     const clonedPlayer = JSON.parse(JSON.stringify(player)) as Player
@@ -48,7 +56,7 @@ const usePlayer = () => {
     setPlayer(clonedPlayer)
   }
 
-  return { player, updatePlayerPos, resetPlayer, rotatePlayer }
+  return { player, updatePlayerPos, firstPlayer, resetPlayer, rotatePlayer }
 }
 
 export default usePlayer

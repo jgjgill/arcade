@@ -1,4 +1,4 @@
-import { buildBoard } from '@utils/tetris'
+import { buildBoard, isColliding } from '@utils/tetris'
 import { useEffect, useState } from 'react'
 
 import type { Board, BoardCell, Player } from '@@types/tetris'
@@ -6,11 +6,16 @@ import type { Board, BoardCell, Player } from '@@types/tetris'
 interface Props {
   player: Player
   resetPlayer: () => void
+  removeFirstPreview: () => void
 }
 
-const useBoard = ({ player, resetPlayer }: Props) => {
+const useBoard = ({ player, resetPlayer, removeFirstPreview }: Props) => {
   const [board, setBoard] = useState(buildBoard())
   const [rowsCleared, setRowsCleared] = useState(0)
+
+  const resetBoard = () => {
+    setBoard(buildBoard())
+  }
 
   useEffect(() => {
     if (!player.pos) return
@@ -27,12 +32,14 @@ const useBoard = ({ player, resetPlayer }: Props) => {
           return acc
         }
 
+        // 끝에 겹치게 끝나는거 해결 필요
         acc.push(row)
         return acc
       }, [] as Board)
     }
 
     const updateBoard = (prevBoard: Board) => {
+      // console.log('updateBoard')
       const newBoard = prevBoard.map(
         (row) =>
           row.map((cell) => (cell[1] === 'clear' ? [0, 'clear'] : cell)) as BoardCell[],
@@ -51,6 +58,8 @@ const useBoard = ({ player, resetPlayer }: Props) => {
 
       if (player.collided) {
         resetPlayer()
+        removeFirstPreview()
+
         return sweepRows(newBoard)
       }
 
@@ -58,9 +67,9 @@ const useBoard = ({ player, resetPlayer }: Props) => {
     }
 
     setBoard((prev) => updateBoard(prev))
-  }, [player, resetPlayer])
+  }, [player, resetPlayer, removeFirstPreview])
 
-  return { board, setBoard, rowsCleared }
+  return { board, setBoard, rowsCleared, resetBoard }
 }
 
 export default useBoard

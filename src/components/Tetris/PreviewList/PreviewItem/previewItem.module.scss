@@ -1,0 +1,56 @@
+@use '/src/styles/constants/colors';
+
+@mixin cell-color($color) {
+  box-sizing: content-box;
+  width: 20px;
+  height: 20px;
+  background: $color;
+  border: 4px solid $color;
+  opacity: 0.8;
+}
+
+.temp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ttt {
+  display: flex;
+}
+
+.cell- {
+  &0 {
+    width: 20px;
+    height: 20px;
+    border: 4px solid transparent;
+  }
+
+  &I {
+    @include cell-color(colors.$TETROMINO_I);
+  }
+
+  &J {
+    @include cell-color(colors.$TETROMINO_J);
+  }
+
+  &L {
+    @include cell-color(colors.$TETROMINO_L);
+  }
+
+  &O {
+    @include cell-color(colors.$TETROMINO_O);
+  }
+
+  &S {
+    @include cell-color(colors.$TETROMINO_S);
+  }
+
+  &T {
+    @include cell-color(colors.$TETROMINO_T);
+  }
+
+  &Z {
+    @include cell-color(colors.$TETROMINO_Z);
+  }
+}
