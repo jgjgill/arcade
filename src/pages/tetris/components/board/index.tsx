@@ -1,5 +1,5 @@
-import styles from '@components/Tetris/board.module.scss'
-import Cell from '@components/Tetris/Cell'
+import styles from '@tetris/components/board/board.module.scss'
+import Cell from '@tetris/components/board/cell'
 
 import type { Board as TBoard } from '@@types/tetris'
 

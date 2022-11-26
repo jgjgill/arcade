@@ -7,7 +7,8 @@ $COLUMNS: 12;
 .wrapper {
   @include neon.border(colors.$GRAY);
 
-  padding: 40px;
+  height: 650px;
+  padding: 10px 20px;
   background-color: colors.$BLACK;
 }
 

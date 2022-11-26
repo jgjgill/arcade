@@ -1,5 +1,5 @@
-import styles from '@components/Tetris/PreviewList/PreviewItem/previewItem.module.scss'
 import { cx } from '@styles/index'
+import styles from '@tetris/components/previewList/previewItem/previewItem.module.scss'
 
 import type { TetrominoShape } from '@@types/tetris'
 
@@ -10,7 +10,7 @@ interface Props {
 const PreviewItem = ({ tetromino }: Props) => {
   return (
     <li className={styles.wrapper}>
-      <div className={styles.temp}>
+      <div className={styles.box}>
         {tetromino.map((row, index) => {
           const key = `row-${index}`
           return (

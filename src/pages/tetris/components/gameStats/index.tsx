@@ -1,4 +1,4 @@
-import styles from '@components/Tetris/gameStats.module.scss'
+import styles from '@tetris/components/gameStats/gameStats.module.scss'
 
 interface Props {
   level: number

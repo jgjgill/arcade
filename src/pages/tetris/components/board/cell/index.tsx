@@ -1,5 +1,5 @@
-import styles from '@components/Tetris/cell.module.scss'
 import { cx } from '@src/styles'
+import styles from '@tetris/components/board/cell/cell.module.scss'
 import { memo } from 'react'
 
 import type { TetrominosKey } from '@@types/tetris'
