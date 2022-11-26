@@ -10,12 +10,14 @@ interface Props {
 const Board = ({ board }: Props) => {
   return (
     <div className={styles.wrapper}>
-      {board.map((row) =>
-        row.map((cell, index) => {
-          const key = `${cell[0]}-${index}`
-          return <Cell key={key} type={cell[0]} />
-        }),
-      )}
+      <div className={styles.game}>
+        {board.map((row) =>
+          row.map((cell, index) => {
+            const key = `${cell[0]}-${index}`
+            return <Cell key={key} type={cell[0]} />
+          }),
+        )}
+      </div>
     </div>
   )
 }

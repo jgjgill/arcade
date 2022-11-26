@@ -9,12 +9,12 @@ interface Props {
 
 const PreviewItem = ({ tetromino }: Props) => {
   return (
-    <li>
+    <li className={styles.wrapper}>
       <div className={styles.temp}>
         {tetromino.map((row, index) => {
           const key = `row-${index}`
           return (
-            <div key={key} className={styles.ttt}>
+            <div key={key} className={styles.row}>
               {row.map((cell, index) => {
                 const key = `${cell}-${index}`
                 return (

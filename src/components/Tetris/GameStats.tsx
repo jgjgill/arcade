@@ -1,31 +1,28 @@
 import styles from '@components/Tetris/gameStats.module.scss'
 
 interface Props {
+  level: number
   score: number
   rows: number
-  level: number
 }
 
-const GameStats = ({ score, rows, level }: Props) => {
+const GameStats = ({ level, score, rows }: Props) => {
   // level, points, linesCompleted, linesPerLevel
   // linesToLevel = linesPerLevel - linesCompleted
+  const STATS_ITEM = [
+    { title: 'LEVEL', content: level },
+    { title: 'SCORE', content: score },
+    { title: 'ROWS', content: rows },
+  ]
 
   return (
-    <dl>
-      <div>
-        <dt>Level</dt>
-        <dd>{level}</dd>
-      </div>
-
-      <div>
-        <dt>Score</dt>
-        <dd>{score}</dd>
-      </div>
-
-      <div>
-        <dt>Rows</dt>
-        <dd>{rows}</dd>
-      </div>
+    <dl className={styles.wrapper}>
+      {STATS_ITEM.map(({ title, content }) => (
+        <div key={title} className={styles.box}>
+          <dt className={styles.title}>{title}</dt>
+          <dd className={styles.content}>{content}</dd>
+        </div>
+      ))}
     </dl>
   )
 }

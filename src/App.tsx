@@ -59,7 +59,7 @@ function App() {
     }
   }
 
-  const move = ({ keyCode, repeat }: { keyCode: number; repeat: boolean }) => {
+  const move = ({ keyCode }: { keyCode: number }) => {
     if (gameOver) return
     if (keyCode < 37 || keyCode > 40) return
 
@@ -67,10 +67,7 @@ function App() {
     const keyCodeFunc: Record<number, () => void> = {
       37: () => movePlayer(-1),
       39: () => movePlayer(1),
-      40: () => {
-        if (repeat) return
-        setDropTime(30)
-      },
+      40: () => setDropTime(30),
       38: () => rotatePlayer(board),
     }
 
@@ -108,12 +105,29 @@ function App() {
       ref={gameArea}
       onKeyDown={move}
       onKeyUp={keyUp}
-      style={{ display: 'flex', gap: '10px', height: '100vh' }}
+      style={{
+        display: 'flex',
+        gap: '100px',
+        height: '100vh',
+        padding: '20px 0',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'black',
+      }}
     >
       <Board board={board} />
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100%',
+          gap: '25px',
+        }}
+      >
+        <PreviewList tetrominoes={previewList} />
+        <GameStats score={score} rows={rows} level={level} />
+      </div>
       {gameOver && <Menu onClick={handleClickStartGame} />}
-      <GameStats score={score} rows={rows} level={level} />
-      <PreviewList tetrominoes={previewList} />
     </div>
   )
 }

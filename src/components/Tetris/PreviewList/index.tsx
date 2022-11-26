@@ -9,12 +9,16 @@ interface Props {
 
 const PreviewList = ({ tetrominoes }: Props) => {
   return (
-    <ul className={styles.temp}>
-      {tetrominoes.map((tetromino, index) => {
-        const key = `${tetromino}-${index}`
-        return <PreviewItem key={key} tetromino={tetromino} />
-      })}
-    </ul>
+    <div className={styles.wrapper}>
+      <h2 className={styles.title}>NEXT</h2>
+
+      <ul className={styles.temp}>
+        {tetrominoes.map((tetromino, index) => {
+          const key = `${tetromino}-${index}`
+          return <PreviewItem key={key} tetromino={tetromino} />
+        })}
+      </ul>
+    </div>
   )
 }
 

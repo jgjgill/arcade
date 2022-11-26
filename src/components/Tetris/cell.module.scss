@@ -1,18 +1,19 @@
 @use '/src/styles/constants/colors';
+@use '/src/styles/mixins/neon';
 
 @mixin cell-color($color) {
   background: $color;
-  border: 4px solid $color;
-  opacity: 0.8;
+  border: 0.2rem solid $color;
+  box-shadow:
+    0 0 0.2rem colors.$WHITE,
+    0 0 0.2rem colors.$WHITE,
+    0 0 0.4rem $color,
+    inset 0 0 1.3rem $color;
 }
 
 .cell- {
   &0 {
-    background: colors.$TETROMINO_0;
-    border: 0 solid;
-    opacity: 0.8;
-
-    // @include cell-color(colors.$TETROMINO_0);
+    @include cell-color(colors.$TETROMINO_0);
   }
 
   &I {

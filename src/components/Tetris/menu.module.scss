@@ -1,15 +1,15 @@
 @use '/src/styles/constants/colors';
 @use '/src/styles/mixins/neon';
 
-.container {
+.wrapper {
+  position: absolute;
 }
 
 .button {
-  @include neon.text(colors.$PRIMARY);
+  @include neon.text(colors.$PRIMARY, 5rem);
   @include neon.border(colors.$PRIMARY);
 
-  padding: 15px 20px;
-  font-weight: 700;
+  padding: 50px;
   cursor: pointer;
   background-color: colors.$BLACK;
   transition: 0.3s;
