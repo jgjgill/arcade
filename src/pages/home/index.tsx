@@ -5,7 +5,7 @@ const Home = () => {
   const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate('tetris')
+    navigate('/arcade/tetris')
   }
 
   return (

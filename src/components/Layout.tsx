@@ -5,7 +5,7 @@ const Layout = () => {
   const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate('')
+    navigate('/arcade/')
   }
 
   return (
