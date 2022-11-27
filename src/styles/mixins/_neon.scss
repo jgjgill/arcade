@@ -14,12 +14,9 @@
     0 0 92px $color,
     0 0 102px $color,
     0 0 151px $color;
-
-  &:hover {
-  }
 }
 
-@mixin border($color) {
+@mixin border($color, $hover: false) {
   border: 0.2rem solid colors.$WHITE;
   border-radius: 2rem;
   box-shadow:
@@ -29,4 +26,27 @@
     0 0 0.8rem $color,
     0 0 2.8rem $color,
     inset 0 0 1.3rem $color;
+
+  @if $hover {
+    &:hover {
+      border-color: $color;
+      box-shadow:
+        0 0 0.2rem $color,
+        0 0 0.2rem $color,
+        0 0 2rem $color,
+        0 0 0.8rem $color,
+        0 0 2.8rem $color,
+        inset 0 0 1.3rem $color;
+    }
+  }
+}
+
+@keyframes huerotate {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+
+  100% {
+    filter: hue-rotate(360deg);
+  }
 }

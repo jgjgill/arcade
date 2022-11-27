@@ -10,7 +10,7 @@
 
 .button {
   @include neon.text(colors.$PRIMARY, 5rem);
-  @include neon.border(colors.$PRIMARY);
+  @include neon.border(colors.$PRIMARY, $hover: true);
 
   padding: 50px;
   cursor: pointer;

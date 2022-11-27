@@ -1,6 +1,8 @@
 import styles from '@home/home.module.scss'
 import { useNavigate } from 'react-router-dom'
 
+const GAME_LIST = ['테트리스']
+
 const Home = () => {
   const navigate = useNavigate()
 
@@ -13,11 +15,13 @@ const Home = () => {
       <h1>Game List</h1>
 
       <ul>
-        <li>
-          <button type="button" onClick={handleClick} className={styles.gameButton}>
-            테트리스
-          </button>
-        </li>
+        {GAME_LIST.map((item) => (
+          <li key={item}>
+            <button type="button" onClick={handleClick} className={styles.gameButton}>
+              {item}
+            </button>
+          </li>
+        ))}
       </ul>
 
       <h2>Coming soon...</h2>

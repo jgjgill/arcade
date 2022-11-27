@@ -27,6 +27,5 @@ const useGameStats = (rowsCleared: number) => {
 
   return { score, rows, level, resetGameStats }
 }
-// 점수 -> 레벨 * 뿌신 벽 개수(40, 100, 300, 1200)
 
 export default useGameStats
