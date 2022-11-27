@@ -1,4 +1,5 @@
 @use '/src/styles/constants/colors';
+@use '/src/styles/mixins/neon';
 
 .container {
   position: relative;
@@ -7,6 +8,16 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+}
+
+.infobar {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.infoText {
+  @include neon.text(colors.$GRAY, xx-large);
 }
 
 .sidebar {

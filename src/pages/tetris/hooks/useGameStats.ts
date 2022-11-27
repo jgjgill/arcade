@@ -19,7 +19,14 @@ const useGameStats = (rowsCleared: number) => {
     setRows((prev) => prev + rowsCleared)
   }, [rowsCleared, level])
 
+  useEffect(() => {
+    if (rows <= level * 10) return
+
+    setLevel((prev) => prev + 1)
+  }, [rows, level])
+
   return { score, rows, level, resetGameStats }
 }
+// 점수 -> 레벨 * 뿌신 벽 개수(40, 100, 300, 1200)
 
 export default useGameStats

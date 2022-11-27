@@ -5,6 +5,12 @@ import styles from '@tetris/tetris.module.scss'
 import { isColliding } from '@utils/tetris'
 import { useEffect, useRef, useState } from 'react'
 
+const INFO_TEXT = [
+  '방향키를 이용해주세요',
+  '레벨이 오를수록 속도가 빨라져요',
+  '한 번에 많이 클리어할수록 높은 점수를 얻어요',
+]
+
 const Tetris = () => {
   const [dropTime, setDropTime] = useState<null | number>(null)
   const [gameOver, setGameOver] = useState(true)
@@ -29,7 +35,7 @@ const Tetris = () => {
     if (!gameArea.current) return
 
     gameArea.current.focus()
-    setDropTime(1000)
+    setDropTime(1000 / level + 200)
     setGameOver(false)
 
     resetBoard()
@@ -49,7 +55,7 @@ const Tetris = () => {
     if (gameOver) return
 
     if (keyCode === 40) {
-      setDropTime(1000)
+      setDropTime(1000 / level + 200)
     }
   }
 
@@ -101,6 +107,14 @@ const Tetris = () => {
       onKeyUp={keyUp}
       className={styles.container}
     >
+      <div className={styles.infobar}>
+        {INFO_TEXT.map((item) => (
+          <span key={item} className={styles.infoText}>
+            {item}
+          </span>
+        ))}
+      </div>
+
       <Board board={board} />
 
       <div className={styles.sidebar}>

@@ -7,8 +7,6 @@ interface Props {
 }
 
 const GameStats = ({ level, score, rows }: Props) => {
-  // level, points, linesCompleted, linesPerLevel
-  // linesToLevel = linesPerLevel - linesCompleted
   const STATS_ITEM = [
     { title: 'LEVEL', content: level },
     { title: 'SCORE', content: score },

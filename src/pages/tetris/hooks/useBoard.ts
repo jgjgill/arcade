@@ -1,4 +1,4 @@
-import { buildBoard, isColliding } from '@utils/tetris'
+import { buildBoard } from '@utils/tetris'
 import { useEffect, useState } from 'react'
 
 import type { Board, BoardCell, Player } from '@@types/tetris'
@@ -32,14 +32,12 @@ const useBoard = ({ player, resetPlayer, removeFirstPreview }: Props) => {
           return acc
         }
 
-        // 끝에 겹치게 끝나는거 해결 필요
         acc.push(row)
         return acc
       }, [] as Board)
     }
 
     const updateBoard = (prevBoard: Board) => {
-      // console.log('updateBoard')
       const newBoard = prevBoard.map(
         (row) =>
           row.map((cell) => (cell[1] === 'clear' ? [0, 'clear'] : cell)) as BoardCell[],
