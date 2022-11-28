@@ -1,15 +1,9 @@
 import useInterval from '@hooks/useInterval'
-import { Board, GameStats, Menu, PreviewList } from '@tetris/components'
+import { Board, GameStats, Info, Menu, PreviewList } from '@tetris/components'
 import { useBoard, useGameStats, usePlayer, usePreview } from '@tetris/hooks'
 import styles from '@tetris/tetris.module.scss'
 import { isColliding } from '@utils/tetris'
 import { useEffect, useRef, useState } from 'react'
-
-const INFO_TEXT = [
-  '방향키를 이용해주세요',
-  '레벨이 오를수록 속도가 빨라져요',
-  '한 번에 많이 클리어할수록 높은 점수를 얻어요',
-]
 
 const Tetris = () => {
   const [dropTime, setDropTime] = useState<null | number>(null)
@@ -107,20 +101,11 @@ const Tetris = () => {
       onKeyUp={keyUp}
       className={styles.container}
     >
-      <div className={styles.infobar}>
-        {INFO_TEXT.map((item) => (
-          <span key={item} className={styles.infoText}>
-            {item}
-          </span>
-        ))}
-      </div>
-
+      <Info />
       <Board board={board} />
-
       <div className={styles.sidebar}>
         <PreviewList tetrominoes={previewList} />
         <GameStats score={score} rows={rows} level={level} />
-
         {gameOver && <Menu onClick={handleClickStartGame} />}
       </div>
     </div>

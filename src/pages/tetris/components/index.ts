@@ -1,3 +1,4 @@
+export { default as Info } from '@src/pages/tetris/components/info'
 export { default as Board } from '@tetris/components/board'
 export { default as GameStats } from '@tetris/components/gameStats'
 export { default as Menu } from '@tetris/components/menu'

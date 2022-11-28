@@ -10,16 +10,6 @@
   height: 100%;
 }
 
-.infobar {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-}
-
-.infoText {
-  @include neon.text(colors.$GRAY, xx-large);
-}
-
 .sidebar {
   display: flex;
   flex-direction: column;

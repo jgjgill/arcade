@@ -1,0 +1,27 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/neon';
+
+@mixin cell-color($color) {
+  background: $color;
+  border: 0.2rem solid $color;
+  box-shadow:
+    0 0 0.2rem colors.$WHITE,
+    0 0 0.2rem colors.$WHITE,
+    0 0 0.4rem $color,
+    inset 0 0 1.3rem $color;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.cell- {
+  &0 {
+    @include cell-color(colors.$BLACK);
+
+    color: colors.$GRAY;
+  }
+}

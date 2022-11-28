@@ -13,6 +13,7 @@ export default defineConfig({
       { find: '@hooks', replacement: resolve(__dirname, 'src/hooks') },
       { find: '@pages', replacement: resolve(__dirname, 'src/pages') },
       { find: '@home', replacement: resolve(__dirname, 'src/pages/home') },
+      { find: '@minesweeper', replacement: resolve(__dirname, 'src/pages/minesweeper') },
       { find: '@tetris', replacement: resolve(__dirname, 'src/pages/tetris') },
       { find: '@styles', replacement: resolve(__dirname, 'src/styles') },
       { find: '@@types', replacement: resolve(__dirname, 'src/types') },

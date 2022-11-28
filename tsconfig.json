@@ -23,6 +23,7 @@
       "@hooks/*": ["src/hooks/*"],
       "@pages/*": ["src/pages/*"],
       "@home/*": ["src/pages/home/*"],
+      "@minesweeper/*": ["src/pages/minesweeper/*"],
       "@tetris/*": ["src/pages/tetris/*"],
       "@styles/*": ["src/styles/*"],
       "@@types/*": ["src/types/*"],
