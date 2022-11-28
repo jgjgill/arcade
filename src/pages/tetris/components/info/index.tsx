@@ -1,4 +1,4 @@
-import styles from '@tetris/components/Info/info.module.scss'
+import styles from '@tetris/components/info/info.module.scss'
 
 const INFO_TEXT = [
   '방향키를 이용해주세요',
