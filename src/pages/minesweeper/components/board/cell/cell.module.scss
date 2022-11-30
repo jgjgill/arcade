@@ -12,6 +12,8 @@
 }
 
 .cell {
+  @include cell-color(colors.$BLACK);
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,8 +22,38 @@
 
 .cell- {
   &0 {
-    @include cell-color(colors.$BLACK);
-
     color: colors.$GRAY;
+  }
+
+  &1 {
+    color: colors.$ONE_MINE;
+  }
+
+  &2 {
+    color: colors.$TWO_MINE;
+  }
+
+  &3 {
+    color: colors.$THREE_MINE;
+  }
+
+  &4 {
+    color: colors.$FOUR_MINE;
+  }
+
+  &5 {
+    color: colors.$FIVE_MINE;
+  }
+
+  &6 {
+    color: colors.$SIX_MINE;
+  }
+
+  &7 {
+    color: colors.$SEVEN_MINE;
+  }
+
+  &8 {
+    color: colors.$EIGHT_MINE;
   }
 }

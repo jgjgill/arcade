@@ -1,6 +1,6 @@
 export const buildBoard = ({ row, column }: { row: number; column: number }) => {
-  const board = Array.from({ length: row }, (_, row) =>
-    Array.from({ length: column }, (_, column) => [row, column, 0]),
+  const board = Array.from({ length: row }, (_, r) =>
+    Array.from({ length: column }, (_, c) => [row * r + c + 1, 0]),
   )
 
   return board
@@ -32,13 +32,12 @@ export const createMineArray = ({ length, clickIndex, mineCount }: Temp) => {
   const mineArray = []
 
   while (mineArray.length !== mineCount) {
-    const index = Math.floor(Math.random() * numbers.length)
+    const index = Math.floor(Math.random() * numbers.length + 1)
     const random = numbers.splice(index, 1)[0]
 
     mineArray.push(random)
   }
 
-  console.log(numbers)
   return mineArray
 }
 
