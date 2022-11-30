@@ -1,28 +1,25 @@
 import { Board } from '@minesweeper/components'
+import { useBoard, useGameStats, usePlayer } from '@minesweeper/hooks'
 import styles from '@minesweeper/minesweeper.module.scss'
-import { createMineArray } from '@src/utils/minesweeper'
 import { useState } from 'react'
-
-import useBoard from './hooks/useBoard'
 
 type TModeName = 'beginner' | 'intermediate' | 'advanced'
 
 const Minesweeper = () => {
   const [mode, setMode] = useState<TModeName>('beginner')
 
-  const { boardInfo } = useBoard(mode)
-  const mine = createMineArray({
-    clickIndex: 10,
-    length: boardInfo.row * boardInfo.column,
-    mineCount: boardInfo.mineCount,
-  })
+  const { row, column, mineCount } = useGameStats({ mode })
+  const { board } = useBoard({ row, column })
+  const { resetFirst } = usePlayer()
 
-  console.log(mine)
+  // console.log(board)
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setMode(e.currentTarget.value as TModeName)
   }
 
-  // return temp[mode]
+  // useEffect(() => {
+  //   resetFirst()
+  // }, [resetFirst, boardInfo])
 
   return (
     <div className={styles.container}>
@@ -40,7 +37,7 @@ const Minesweeper = () => {
         </button>
       </div>
 
-      <Board boardInfo={boardInfo} />
+      <Board board={board} />
     </div>
   )
 }

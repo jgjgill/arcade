@@ -4,24 +4,23 @@ import { buildBoard } from '@src/utils/minesweeper'
 import React from 'react'
 
 interface Props {
-  boardInfo: { row: number; column: number; mineCount: number }
+  board: number[][][]
 }
 
-const Board = ({ boardInfo }: Props) => {
-  const { row, column, mineCount } = boardInfo
-  const board = buildBoard({ row, column })
-
-  console.log(board)
+const Board = ({ board }: Props) => {
+  // console.log(board[0])
   return (
     <div className={styles.wrapper}>
       <div
         className={styles.game}
-        style={{ '--row': row, '--column': column } as React.CSSProperties}
+        style={
+          { '--row': board.length, '--column': board[0].length } as React.CSSProperties
+        }
       >
         {board.map((row) =>
           row.map((cell, index) => {
             const key = `${cell[0]}-${index}`
-            return <Cell key={key} index={cell[0]} type={cell[1]} />
+            return <Cell key={key} index={cell[0]} type={cell[2]} />
           }),
         )}
       </div>

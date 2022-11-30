@@ -1,19 +1,24 @@
-import { calcArrayIndex } from '@src/utils/minesweeper'
+import { buildBoard } from '@src/utils/minesweeper'
+import { useEffect, useState } from 'react'
 
 type TModeName = 'beginner' | 'intermediate' | 'advanced'
 type BoardInfo = { row: number; column: number; mineCount: number }
 type TMode = Record<TModeName, BoardInfo>
 
-const useBoard = (mode: TModeName) => {
-  const firstBoard: TMode = {
-    beginner: { row: 3, column: 3, mineCount: 3 },
-    intermediate: { row: 5, column: 5, mineCount: 10 },
-    advanced: { row: 10, column: 10, mineCount: 25 },
+const useBoard = ({ row, column }: { row: number; column: number }) => {
+  const [board, setBoard] = useState(buildBoard({ row, column }))
+
+  const changeBoard = {
+    // setBoard()
   }
 
-  // const clickBoard = 23
+  useEffect(() => {
+    setBoard(buildBoard({ row, column }))
+  }, [row, column])
 
-  return { boardInfo: firstBoard[mode] }
+  // const board = buildBoard({ row, column })
+
+  return { board }
 }
 
 export default useBoard

@@ -1,8 +1,8 @@
 export const buildBoard = ({ row, column }: { row: number; column: number }) => {
   const board = Array.from({ length: row }, (_, r) =>
-    Array.from({ length: column }, (_, c) => [row * r + c + 1, 0]),
+    Array.from({ length: column }, (_, c) => [r, c, 0]),
   )
-
+  // row * r + c + 1
   return board
 }
 

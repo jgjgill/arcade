@@ -8,9 +8,19 @@ interface Props {
 }
 
 const Cell = ({ index, type }: Props) => {
-  console.log(index, type)
+  // console.log(index, type)
+  // contextApi 활용해야할듯
+
+  const handleTemp = () => {
+    // groundClick()
+  }
+
   return (
-    <button type="button" className={cx(styles.cell, styles[`cell-${type}`])}>
+    <button
+      type="button"
+      onClick={handleTemp}
+      className={cx(styles.cell, styles[`cell-${type}`])}
+    >
       {type}
     </button>
   )
