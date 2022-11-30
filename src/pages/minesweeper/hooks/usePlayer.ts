@@ -1,9 +1,17 @@
-import { createMineArray } from '@src/utils/minesweeper'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-const usePlayer = () => {
+type TModeName = 'beginner' | 'intermediate' | 'advanced'
+
+interface Props {
+  mode: TModeName
+}
+
+const usePlayer = ({ mode }: Props) => {
   const [isFirst, setIsFirst] = useState(true)
+  const clickX = 2
+  const clickY = 2
 
+  // contextApi 사용?
   const groundClick = () => {
     if (isFirst) {
       console.log('지뢰 생성')
@@ -13,17 +21,11 @@ const usePlayer = () => {
     }
   }
 
-  // const mine = createMineArray({
-  //   clickIndex: 10,
-  //   length: boardInfo.row * boardInfo.column,
-  //   mineCount: boardInfo.mineCount,
-  // })
-
-  const resetFirst = () => {
+  useEffect(() => {
     setIsFirst(true)
-  }
+  }, [mode])
 
-  return { isFirst, groundClick, resetFirst }
+  return { isFirst, groundClick, clickX, clickY }
 }
 
 export default usePlayer

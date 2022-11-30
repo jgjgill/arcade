@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Cell = ({ index, type }: Props) => {
-  // console.log(index, type)
+  // console.log(type)
   // contextApi 활용해야할듯
 
   const handleTemp = () => {

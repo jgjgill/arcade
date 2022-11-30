@@ -1,6 +1,5 @@
 import styles from '@minesweeper/components/board/board.module.scss'
 import Cell from '@minesweeper/components/board/cell'
-import { buildBoard } from '@src/utils/minesweeper'
 import React from 'react'
 
 interface Props {
@@ -8,7 +7,6 @@ interface Props {
 }
 
 const Board = ({ board }: Props) => {
-  // console.log(board[0])
   return (
     <div className={styles.wrapper}>
       <div
@@ -19,7 +17,7 @@ const Board = ({ board }: Props) => {
       >
         {board.map((row) =>
           row.map((cell, index) => {
-            const key = `${cell[0]}-${index}`
+            const key = `${cell[2]}-${index}`
             return <Cell key={key} index={cell[0]} type={cell[2]} />
           }),
         )}

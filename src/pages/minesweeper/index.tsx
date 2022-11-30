@@ -9,21 +9,25 @@ const Minesweeper = () => {
   const [mode, setMode] = useState<TModeName>('beginner')
 
   const { row, column, mineCount } = useGameStats({ mode })
-  const { board } = useBoard({ row, column })
-  const { resetFirst } = usePlayer()
+  const { isFirst, groundClick, clickX, clickY } = usePlayer({ mode })
+  const { board } = useBoard({ row, column, isFirst, mineCount, clickX, clickY })
 
-  // console.log(board)
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setMode(e.currentTarget.value as TModeName)
   }
 
-  // useEffect(() => {
-  //   resetFirst()
-  // }, [resetFirst, boardInfo])
+  const handleTemp = () => {
+    groundClick()
+  }
+
+  console.log(isFirst)
 
   return (
     <div className={styles.container}>
       <div className={styles.temp}>
+        <button type="button" onClick={handleTemp}>
+          임시 버튼
+        </button>
         <button type="button" value="beginner" onClick={handleClick}>
           초급
         </button>

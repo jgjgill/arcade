@@ -1,11 +1,16 @@
-import { buildBoard } from '@src/utils/minesweeper'
+import { buildBoard, injectMineArray } from '@src/utils/minesweeper'
 import { useEffect, useState } from 'react'
 
-type TModeName = 'beginner' | 'intermediate' | 'advanced'
-type BoardInfo = { row: number; column: number; mineCount: number }
-type TMode = Record<TModeName, BoardInfo>
+interface Props {
+  row: number
+  column: number
+  mineCount: number
+  isFirst: boolean
+  clickX: number
+  clickY: number
+}
 
-const useBoard = ({ row, column }: { row: number; column: number }) => {
+const useBoard = ({ row, column, mineCount, isFirst, clickX, clickY }: Props) => {
   const [board, setBoard] = useState(buildBoard({ row, column }))
 
   const changeBoard = {
@@ -16,7 +21,12 @@ const useBoard = ({ row, column }: { row: number; column: number }) => {
     setBoard(buildBoard({ row, column }))
   }, [row, column])
 
-  // const board = buildBoard({ row, column })
+  useEffect(() => {
+    if (isFirst) return
+
+    console.log('처음 클릭에 따른 보드 재생성')
+    setBoard(injectMineArray({ row, column, mineCount, clickX, clickY }))
+  }, [isFirst, clickX, clickY, column, mineCount, row])
 
   return { board }
 }
