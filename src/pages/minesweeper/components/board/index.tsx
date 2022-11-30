@@ -1,9 +1,10 @@
 import styles from '@minesweeper/components/board/board.module.scss'
 import Cell from '@minesweeper/components/board/cell'
+import { Board as TBoard } from '@src/types/minesweeper'
 import React from 'react'
 
 interface Props {
-  board: number[][][]
+  board: TBoard
 }
 
 const Board = ({ board }: Props) => {

@@ -1,4 +1,4 @@
-import { buildBoard, injectMineArray } from '@src/utils/minesweeper'
+import { buildBoard, createMineArray, injectMineArray } from '@src/utils/minesweeper'
 import { useEffect, useState } from 'react'
 
 interface Props {
@@ -24,9 +24,18 @@ const useBoard = ({ row, column, mineCount, isFirst, clickX, clickY }: Props) =>
   useEffect(() => {
     if (isFirst) return
 
-    console.log('처음 클릭에 따른 보드 재생성')
-    setBoard(injectMineArray({ row, column, mineCount, clickX, clickY }))
+    const newBoard = injectMineArray({
+      mineArray: createMineArray({ row, column, mineCount, clickX, clickY }),
+      board: buildBoard({ row, column }),
+      column,
+      row,
+    })
+
+    setBoard(newBoard)
   }, [isFirst, clickX, clickY, column, mineCount, row])
+
+  // 클릭에 따른 보드 업데이트
+  // dfs 로직 구현
 
   return { board }
 }

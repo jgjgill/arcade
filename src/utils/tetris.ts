@@ -33,7 +33,6 @@ export const rotate = (matrix: Player['tetromino']) => {
 }
 
 export const isColliding = ({ player, board, moveX, moveY }: IsColliding) => {
-  // console.log(player.pos)
   for (let y = 0; y < player.tetromino.length; y++) {
     for (let x = 0; x < player.tetromino[y].length; x++) {
       // 해당 테트로미노 칸이 빈칸이면 생략

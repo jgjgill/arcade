@@ -20,8 +20,6 @@ const Minesweeper = () => {
     groundClick()
   }
 
-  console.log(isFirst)
-
   return (
     <div className={styles.container}>
       <div className={styles.temp}>

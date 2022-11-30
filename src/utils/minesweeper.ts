@@ -1,9 +1,4 @@
-export const buildBoard = ({ row, column }: { row: number; column: number }) => {
-  const board = Array.from({ length: row }, (_, r) =>
-    Array.from({ length: column }, (_, c) => [r, c, 0]),
-  )
-  return board
-}
+import { Board, BoardCell } from '@src/types/minesweeper'
 
 interface Temp {
   row: number
@@ -13,10 +8,24 @@ interface Temp {
   mineCount: number
 }
 
+interface Inject {
+  row: number
+  column: number
+  mineArray: number[]
+  board: Board
+}
+
 interface Calc {
   row: number
   clickX: number
   clickY: number
+}
+
+export const buildBoard = ({ row, column }: { row: number; column: number }): Board => {
+  const board = Array.from({ length: row }, (_, r) =>
+    Array.from({ length: column }, (_, c) => [r, c, 0] as BoardCell),
+  )
+  return board
 }
 
 export const calcArrayIndex = ({ row, clickX, clickY }: Calc) => {
@@ -43,18 +52,7 @@ export const createMineArray = ({ row, column, clickX, clickY, mineCount }: Temp
   return mineArray
 }
 
-interface Inject {
-  column: number
-  row: number
-  mineCount: number
-  clickX: number
-  clickY: number
-}
-
-export const injectMineArray = ({ column, row, mineCount, clickX, clickY }: Inject) => {
-  const mineArray = createMineArray({ row, column, mineCount, clickX, clickY })
-  const board = buildBoard({ row, column })
-
+export const injectMineArray = ({ column, row, mineArray, board }: Inject) => {
   mineArray.forEach((item) => {
     const mineRow = Math.floor(item / row)
     const mineColumn = item % column
