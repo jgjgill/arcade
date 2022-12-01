@@ -25,6 +25,7 @@
       "@home/*": ["src/pages/home/*"],
       "@minesweeper/*": ["src/pages/minesweeper/*"],
       "@tetris/*": ["src/pages/tetris/*"],
+      "@states/*": ["src/states/*"],
       "@styles/*": ["src/styles/*"],
       "@@types/*": ["src/types/*"],
       "@utils/*": ["src/utils/*"]

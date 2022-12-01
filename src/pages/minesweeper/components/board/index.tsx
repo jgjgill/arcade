@@ -1,13 +1,16 @@
 import styles from '@minesweeper/components/board/board.module.scss'
 import Cell from '@minesweeper/components/board/cell'
-import { Board as TBoard } from '@src/types/minesweeper'
-import React from 'react'
+
+import { Board as TBoard } from '@@types/minesweeper'
 
 interface Props {
   board: TBoard
+  isView: boolean
 }
 
-const Board = ({ board }: Props) => {
+const Board = ({ board, isView }: Props) => {
+  if (!isView) return null
+
   return (
     <div className={styles.wrapper}>
       <div
@@ -19,7 +22,7 @@ const Board = ({ board }: Props) => {
         {board.map((row) =>
           row.map((cell, index) => {
             const key = `${cell[2]}-${index}`
-            return <Cell key={key} index={cell[0]} type={cell[2]} />
+            return <Cell key={key} x={cell[0]} y={cell[1]} type={cell[2]} />
           }),
         )}
       </div>

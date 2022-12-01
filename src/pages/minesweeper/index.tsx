@@ -1,31 +1,21 @@
+import { useAppDispatch, useAppSelector } from '@hooks/state'
 import { Board } from '@minesweeper/components'
-import { useBoard, useGameStats, usePlayer } from '@minesweeper/hooks'
 import styles from '@minesweeper/minesweeper.module.scss'
-import { useState } from 'react'
+import { createBoard, selectBoard } from '@states/minesweeper'
 
-type TModeName = 'beginner' | 'intermediate' | 'advanced'
+import { TModeName } from '@@types/minesweeper'
 
 const Minesweeper = () => {
-  const [mode, setMode] = useState<TModeName>('beginner')
-
-  const { row, column, mineCount } = useGameStats({ mode })
-  const { isFirst, groundClick, clickX, clickY } = usePlayer({ mode })
-  const { board } = useBoard({ row, column, isFirst, mineCount, clickX, clickY })
+  const dispatch = useAppDispatch()
+  const board = useAppSelector(selectBoard)
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setMode(e.currentTarget.value as TModeName)
-  }
-
-  const handleTemp = () => {
-    groundClick()
+    dispatch(createBoard({ mode: e.currentTarget.value as TModeName }))
   }
 
   return (
     <div className={styles.container}>
       <div className={styles.temp}>
-        <button type="button" onClick={handleTemp}>
-          임시 버튼
-        </button>
         <button type="button" value="beginner" onClick={handleClick}>
           초급
         </button>
@@ -39,7 +29,7 @@ const Minesweeper = () => {
         </button>
       </div>
 
-      <Board board={board} />
+      <Board board={board} isView={board.length !== 0} />
     </div>
   )
 }

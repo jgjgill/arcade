@@ -1,24 +1,26 @@
+import { useAppDispatch } from '@hooks/state'
 import styles from '@minesweeper/components/board/cell/cell.module.scss'
-import { cx } from '@src/styles'
+import { createFirstClickBoard } from '@states/minesweeper'
+import { cx } from '@styles/index'
 
 interface Props {
-  index: number
+  x: number
+  y: number
   type: any
   // type: '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8'
 }
 
-const Cell = ({ index, type }: Props) => {
-  // console.log(type)
-  // contextApi 활용해야할듯
+const Cell = ({ x, y, type }: Props) => {
+  const dispatch = useAppDispatch()
 
-  const handleTemp = () => {
-    // groundClick()
+  const handleClick = () => {
+    dispatch(createFirstClickBoard({ clickX: x, clickY: y }))
   }
 
   return (
     <button
       type="button"
-      onClick={handleTemp}
+      onClick={handleClick}
       className={cx(styles.cell, styles[`cell-${type}`])}
     >
       {type}

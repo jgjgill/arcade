@@ -15,6 +15,7 @@ export default defineConfig({
       { find: '@home', replacement: resolve(__dirname, 'src/pages/home') },
       { find: '@minesweeper', replacement: resolve(__dirname, 'src/pages/minesweeper') },
       { find: '@tetris', replacement: resolve(__dirname, 'src/pages/tetris') },
+      { find: '@states', replacement: resolve(__dirname, 'src/states') },
       { find: '@styles', replacement: resolve(__dirname, 'src/styles') },
       { find: '@@types', replacement: resolve(__dirname, 'src/types') },
       { find: '@utils', replacement: resolve(__dirname, 'src/utils') },
