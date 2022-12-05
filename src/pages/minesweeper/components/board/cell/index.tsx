@@ -1,29 +1,58 @@
-import { useAppDispatch } from '@hooks/state'
+import { useAppDispatch, useAppSelector } from '@hooks/state'
 import styles from '@minesweeper/components/board/cell/cell.module.scss'
-import { createFirstClickBoard } from '@states/minesweeper'
+import { BombIcon, FlagIcon } from '@src/assets/svgs'
+import { CellInfo } from '@src/types/minesweeper'
+import {
+  clickGround,
+  createFirstClickBoard,
+  ctxMenuFlag,
+  selectIsFirst,
+  selectStatus,
+} from '@states/minesweeper'
 import { cx } from '@styles/index'
 
 interface Props {
   x: number
   y: number
-  type: any
-  // type: '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8'
+  type: CellInfo
 }
 
 const Cell = ({ x, y, type }: Props) => {
   const dispatch = useAppDispatch()
+  const isFirst = useAppSelector(selectIsFirst)
+  const status = useAppSelector(selectStatus)
 
   const handleClick = () => {
-    dispatch(createFirstClickBoard({ clickX: x, clickY: y }))
+    if (status === 'stop') return
+
+    isFirst
+      ? dispatch(createFirstClickBoard({ clickX: x, clickY: y }))
+      : dispatch(clickGround({ clickX: x, clickY: y, type }))
+  }
+
+  const handleCtxMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    if (type === 'check' || Number.isInteger(type)) return
+    if (status === 'stop') return
+    if (isFirst) return
+
+    dispatch(ctxMenuFlag({ clickX: x, clickY: y, type }))
   }
 
   return (
     <button
       type="button"
       onClick={handleClick}
+      onContextMenu={handleCtxMenu}
       className={cx(styles.cell, styles[`cell-${type}`])}
     >
-      {type}
+      {Number.isInteger(type) && type}
+      {status === 'start' && (type === 'flag' || type === 'mineFlag') && (
+        <FlagIcon style={{ fill: 'white' }} />
+      )}
+      {status === 'stop' && (type === 'mine' || type === 'mineFlag') && (
+        <BombIcon style={{ fill: 'white' }} />
+      )}
     </button>
   )
 }

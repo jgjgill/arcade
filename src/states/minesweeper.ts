@@ -8,7 +8,7 @@ import {
   updateMineBoard,
 } from '@utils/minesweeper'
 
-import { Board, BoardInfo, ClickIndex, TModeName } from '@@types/minesweeper'
+import { Board, BoardInfo, CellInfo, ClickIndex, TModeName } from '@@types/minesweeper'
 
 export interface DateState {
   boardInfo: BoardInfo
@@ -38,6 +38,7 @@ const systemSlice = createSlice({
       state.boardInfo.mine = newBoardInfo.mine
       state.isFirst = true
       state.board = buildBoard({ row: newBoardInfo.row, column: newBoardInfo.column })
+      state.status = 'start'
     },
     createFirstClickBoard: (state, action: PayloadAction<ClickIndex>) => {
       if (!state.isFirst) return
@@ -51,17 +52,44 @@ const systemSlice = createSlice({
         column,
         board,
       })
-
       checkAroundMine({ clickX, clickY, board, row, column })
-      // check주변 지뢰
 
       state.isFirst = false
+    },
+    clickGround: (state, action: PayloadAction<{ type: CellInfo } & ClickIndex>) => {
+      if (state.isFirst) return
+
+      const { board } = state
+      const { row, column } = state.boardInfo
+      const { clickX, clickY, type } = action.payload
+
+      if (type === 'mine' || type === 'mineFlag') {
+        state.status = 'stop'
+        return
+      }
+
+      checkAroundMine({ clickX, clickY, board, row, column })
+    },
+    ctxMenuFlag: (state, action: PayloadAction<{ type: CellInfo } & ClickIndex>) => {
+      const { clickX, clickY, type } = action.payload
+
+      const changeType: Partial<Record<CellInfo, CellInfo>> = {
+        mine: 'mineFlag',
+        mineFlag: 'mine',
+        uncheck: 'flag',
+        flag: 'uncheck',
+      }
+
+      state.board[clickX][clickY][2] = changeType[type] ?? type
     },
   },
 })
 
-export const { createBoard, createFirstClickBoard } = systemSlice.actions
+export const { createBoard, createFirstClickBoard, clickGround, ctxMenuFlag } =
+  systemSlice.actions
 
 export default systemSlice.reducer
 
 export const selectBoard = (state: RootState) => state.minesweeper.board
+export const selectIsFirst = (state: RootState) => state.minesweeper.isFirst
+export const selectStatus = (state: RootState) => state.minesweeper.status

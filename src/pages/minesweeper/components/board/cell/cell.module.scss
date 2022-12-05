@@ -21,36 +21,38 @@
   cursor: pointer;
 }
 
-.cell- {
-  &1 {
-    color: colors.$ONE_MINE;
-  }
+.cell-check {
+  background-color: gray;
+}
 
-  &2 {
-    color: colors.$TWO_MINE;
-  }
+.cell-1 {
+  color: colors.$ONE_MINE;
+}
 
-  &3 {
-    color: colors.$THREE_MINE;
-  }
+.cell-2 {
+  color: colors.$TWO_MINE;
+}
 
-  &4 {
-    color: colors.$FOUR_MINE;
-  }
+.cell-3 {
+  color: colors.$THREE_MINE;
+}
 
-  &5 {
-    color: colors.$FIVE_MINE;
-  }
+.cell-4 {
+  color: colors.$FOUR_MINE;
+}
 
-  &6 {
-    color: colors.$SIX_MINE;
-  }
+.cell-5 {
+  color: colors.$FIVE_MINE;
+}
 
-  &7 {
-    color: colors.$SEVEN_MINE;
-  }
+.cell-6 {
+  color: colors.$SIX_MINE;
+}
 
-  &8 {
-    color: colors.$EIGHT_MINE;
-  }
+.cell-7 {
+  color: colors.$SEVEN_MINE;
+}
+
+.cell-8 {
+  color: colors.$EIGHT_MINE;
 }
