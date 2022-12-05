@@ -19,7 +19,7 @@ export const updateBoardInfo = (mode: TModeName) => {
 
 export const buildBoard = ({ row, column }: BoardRowColumn) => {
   const board = Array.from({ length: row }, (_, r) =>
-    Array.from({ length: column }, (_, c) => [r, c, 0] as BoardCell),
+    Array.from({ length: column }, (_, c) => [r, c, 'uncheck'] as BoardCell),
   )
   return board as Board
 }
@@ -39,9 +39,9 @@ const createNotClickIndexArray = (length: number, clickIndex: number) => {
 export const createMineArray = ({
   row,
   column,
+  mine,
   clickX,
   clickY,
-  mine,
 }: BoardInfo & ClickIndex) => {
   const clickIndex = calcArrayIndex({ row, clickX, clickY })
   const numbers = createNotClickIndexArray(row * column, clickIndex)
@@ -66,6 +66,65 @@ export const updateMineBoard = (
     const mineRow = Math.floor(item / row)
     const mineColumn = item % column
 
-    board[mineRow][mineColumn] = [mineRow, mineColumn, 999]
+    board[mineRow][mineColumn] = [mineRow, mineColumn, 'mine']
   })
+}
+
+const DIRS = [
+  [-1, -1],
+  [-1, 0],
+  [-1, 1],
+  [0, -1],
+  [0, 1],
+  [1, -1],
+  [1, 0],
+  [1, 1],
+]
+
+export const checkAroundMine = ({
+  clickX,
+  clickY,
+  board,
+  row,
+  column,
+}: {
+  clickX: number
+  clickY: number
+  board: Board
+  row: number
+  column: number
+}) => {
+  const stack = [[clickX, clickY]]
+
+  while (stack.length !== 0) {
+    const [currentX, currentY] = stack.pop() as number[]
+    const check = []
+    let mineCount = 0 as 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
+
+    for (const dir of DIRS) {
+      const injectX = currentX + dir[0]
+      const injectY = currentY + dir[1]
+
+      if (injectX <= -1 || injectY <= -1 || injectX >= row || injectY >= column) continue
+      if (
+        board[injectX][injectY][2] === 'mineFlag' ||
+        board[injectX][injectY][2] === 'mine'
+      ) {
+        mineCount += 1
+        continue
+      }
+      if (board[injectX][injectY][2] !== 'uncheck') continue
+      check.push([injectX, injectY])
+    }
+
+    board[currentX][currentY] = [currentX, currentY, mineCount || 'check']
+
+    if (mineCount !== 0) continue
+
+    stack.push(...check)
+    for (const ttt of check) {
+      const [checkX, checkY] = ttt
+      board[checkX][checkY] = [checkX, checkY, 'check']
+    }
+  }
 }

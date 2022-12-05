@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '@states/index'
 import {
   buildBoard,
+  checkAroundMine,
   createMineArray,
   updateBoardInfo,
   updateMineBoard,
@@ -50,6 +51,9 @@ const systemSlice = createSlice({
         column,
         board,
       })
+
+      checkAroundMine({ clickX, clickY, board, row, column })
+      // check주변 지뢰
 
       state.isFirst = false
     },

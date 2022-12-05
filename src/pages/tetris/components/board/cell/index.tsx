@@ -1,4 +1,4 @@
-import { cx } from '@src/styles'
+import { cx } from '@styles/index'
 import styles from '@tetris/components/board/cell/cell.module.scss'
 import { memo } from 'react'
 

@@ -17,14 +17,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: colors.$GRAY;
   cursor: pointer;
 }
 
 .cell- {
-  &0 {
-    color: colors.$GRAY;
-  }
-
   &1 {
     color: colors.$ONE_MINE;
   }
