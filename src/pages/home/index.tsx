@@ -16,7 +16,7 @@ const Home = () => {
       <GameList onClick={handleClick} />
 
       <h2>Coming soon...</h2>
-      <span>지뢰 찾기!</span>
+      <span>Tic-Tac-Toe</span>
     </div>
   )
 }
