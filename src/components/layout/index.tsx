@@ -1,4 +1,4 @@
-import styles from '@components/layout.module.scss'
+import styles from '@components/layout/layout.module.scss'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 const Layout = () => {

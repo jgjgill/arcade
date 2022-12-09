@@ -11,7 +11,7 @@ export const updateBoardInfo = (mode: TModeName) => {
   const modeType: Record<TModeName, BoardInfo> = {
     beginner: { row: 3, column: 3, mine: 3 },
     intermediate: { row: 5, column: 5, mine: 5 },
-    advanced: { row: 10, column: 10, mine: 10 },
+    advanced: { row: 10, column: 10, mine: 15 },
   }
 
   return modeType[mode]
@@ -122,9 +122,22 @@ export const checkAroundMine = ({
     if (mineCount !== 0) continue
 
     stack.push(...check)
-    for (const ttt of check) {
-      const [checkX, checkY] = ttt
+    for (const coordinate of check) {
+      const [checkX, checkY] = coordinate
       board[checkX][checkY] = [checkX, checkY, 'check']
     }
   }
+}
+
+export const countUncheck = (board: Board) => {
+  let count = 0
+  board.forEach((row) => {
+    row.forEach((cell) => {
+      if (cell[2] === 'check' || Number.isInteger(cell[2])) return
+
+      count += 1
+    })
+  })
+
+  return count
 }

@@ -1,4 +1,4 @@
-import Layout from '@components/Layout'
+import { Layout } from '@components/index'
 import { HomePage, MinesweeperPage, TerisPage } from '@pages/index'
 import { Route, Routes } from 'react-router-dom'
 

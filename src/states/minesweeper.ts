@@ -8,12 +8,19 @@ import {
   updateMineBoard,
 } from '@utils/minesweeper'
 
-import { Board, BoardInfo, CellInfo, ClickIndex, TModeName } from '@@types/minesweeper'
+import {
+  Board,
+  BoardInfo,
+  CellInfo,
+  ClickIndex,
+  GameStatus,
+  TModeName,
+} from '@@types/minesweeper'
 
 export interface DateState {
   boardInfo: BoardInfo
   board: Board
-  status: 'stop' | 'start'
+  status: GameStatus
   isFirst: boolean
 }
 
@@ -36,8 +43,8 @@ const systemSlice = createSlice({
       state.boardInfo.row = newBoardInfo.row
       state.boardInfo.column = newBoardInfo.column
       state.boardInfo.mine = newBoardInfo.mine
-      state.isFirst = true
       state.board = buildBoard({ row: newBoardInfo.row, column: newBoardInfo.column })
+      state.isFirst = true
       state.status = 'start'
     },
     createFirstClickBoard: (state, action: PayloadAction<ClickIndex>) => {
@@ -64,7 +71,7 @@ const systemSlice = createSlice({
       const { clickX, clickY, type } = action.payload
 
       if (type === 'mine' || type === 'mineFlag') {
-        state.status = 'stop'
+        state.status = 'lose'
         return
       }
 
@@ -82,14 +89,26 @@ const systemSlice = createSlice({
 
       state.board[clickX][clickY][2] = changeType[type] ?? type
     },
+    changeStatus: (state, action: PayloadAction<GameStatus>) => {
+      state.status = action.payload
+    },
+    reset: () => INITIAL_STATE,
   },
 })
 
-export const { createBoard, createFirstClickBoard, clickGround, ctxMenuFlag } =
-  systemSlice.actions
+export const {
+  createBoard,
+  createFirstClickBoard,
+  clickGround,
+  ctxMenuFlag,
+  changeStatus,
+  reset,
+} = systemSlice.actions
 
 export default systemSlice.reducer
 
+export const selectBoardInfo = (state: RootState) => state.minesweeper.boardInfo
 export const selectBoard = (state: RootState) => state.minesweeper.board
 export const selectIsFirst = (state: RootState) => state.minesweeper.isFirst
 export const selectStatus = (state: RootState) => state.minesweeper.status
+export const selectMinesweeper = (state: RootState) => state.minesweeper

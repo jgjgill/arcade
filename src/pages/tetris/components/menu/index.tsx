@@ -1,15 +1,17 @@
+import { Button } from '@components/index'
 import styles from '@tetris/components/menu/menu.module.scss'
 
 interface Props {
   onClick: () => void
+  isView: boolean
 }
 
-const Menu = ({ onClick }: Props) => {
+const Menu = ({ onClick, isView }: Props) => {
+  if (!isView) return null
+
   return (
     <div className={styles.wrapper}>
-      <button type="button" onClick={onClick} className={styles.button}>
-        Play Tetris?
-      </button>
+      <Button isView={isView} onClick={onClick} text="Play Tetris?" size={5} />
     </div>
   )
 }

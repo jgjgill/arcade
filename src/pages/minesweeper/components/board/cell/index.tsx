@@ -1,7 +1,6 @@
+import { BombIcon, FlagIcon } from '@assets/svgs'
 import { useAppDispatch, useAppSelector } from '@hooks/state'
 import styles from '@minesweeper/components/board/cell/cell.module.scss'
-import { BombIcon, FlagIcon } from '@src/assets/svgs'
-import { CellInfo } from '@src/types/minesweeper'
 import {
   clickGround,
   createFirstClickBoard,
@@ -10,6 +9,8 @@ import {
   selectStatus,
 } from '@states/minesweeper'
 import { cx } from '@styles/index'
+
+import { CellInfo } from '@@types/minesweeper'
 
 interface Props {
   x: number
@@ -23,7 +24,8 @@ const Cell = ({ x, y, type }: Props) => {
   const status = useAppSelector(selectStatus)
 
   const handleClick = () => {
-    if (status === 'stop') return
+    if (type === 'check' || Number.isInteger(type)) return
+    if (status !== 'start') return
 
     isFirst
       ? dispatch(createFirstClickBoard({ clickX: x, clickY: y }))
@@ -33,7 +35,7 @@ const Cell = ({ x, y, type }: Props) => {
   const handleCtxMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     if (type === 'check' || Number.isInteger(type)) return
-    if (status === 'stop') return
+    if (status !== 'start') return
     if (isFirst) return
 
     dispatch(ctxMenuFlag({ clickX: x, clickY: y, type }))
@@ -50,7 +52,7 @@ const Cell = ({ x, y, type }: Props) => {
       {status === 'start' && (type === 'flag' || type === 'mineFlag') && (
         <FlagIcon style={{ fill: 'white' }} />
       )}
-      {status === 'stop' && (type === 'mine' || type === 'mineFlag') && (
+      {status !== 'start' && (type === 'mine' || type === 'mineFlag') && (
         <BombIcon style={{ fill: 'white' }} />
       )}
     </button>

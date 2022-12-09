@@ -106,7 +106,7 @@ const Tetris = () => {
       <div className={styles.sidebar}>
         <PreviewList tetrominoes={previewList} />
         <GameStats score={score} rows={rows} level={level} />
-        {gameOver && <Menu onClick={handleClickStartGame} />}
+        <Menu onClick={handleClickStartGame} isView={gameOver} />
       </div>
     </div>
   )

@@ -9,10 +9,10 @@
 }
 
 .button {
+  @include neon.text(colors.$PRIMARY, 2rem);
   @include neon.border(colors.$PRIMARY, $hover: true);
-  @include neon.text(colors.$PRIMARY, 5rem);
 
-  padding: 30px 50px;
+  padding: 30px 40px;
   cursor: pointer;
   background-color: colors.$BLACK;
 }

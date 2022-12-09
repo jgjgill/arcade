@@ -5,23 +5,28 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 100px;
+  gap: 30px;
   align-items: center;
   justify-content: center;
   height: 100%;
   color: colors.$WHITE;
 }
 
-.temp {
+.modeWrapper {
   display: flex;
   gap: 20px;
 
   button {
     @include neon.border(colors.$PRIMARY, $hover: true);
+    @include neon.text(colors.$TERTIARY, 2rem);
 
     padding: 30px 50px;
-    color: colors.$WHITE;
     cursor: pointer;
     background-color: colors.$BLACK;
   }
+}
+
+.infoWrapper {
+  display: flex;
+  gap: 20px;
 }
