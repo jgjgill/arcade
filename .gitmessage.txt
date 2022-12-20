@@ -1,0 +1,6 @@
+# feat: 새로운 기능
+# fix: 에러 해결
+# refactor: 리팩토링
+# build: 빌드 설정 수정
+# style: 코드 스타일 수정
+# chore: 기타 작업
