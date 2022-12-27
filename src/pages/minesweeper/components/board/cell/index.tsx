@@ -9,6 +9,7 @@ import {
   selectStatus,
 } from '@states/minesweeper'
 import { cx } from '@styles/index'
+import { memo } from 'react'
 
 import { CellInfo } from '@@types/minesweeper'
 
@@ -23,6 +24,7 @@ const Cell = ({ x, y, type }: Props) => {
   const isFirst = useAppSelector(selectIsFirst)
   const status = useAppSelector(selectStatus)
 
+  console.log(type)
   const handleClick = () => {
     if (type === 'check' || Number.isInteger(type)) return
     if (status !== 'start') return
@@ -59,4 +61,4 @@ const Cell = ({ x, y, type }: Props) => {
   )
 }
 
-export default Cell
+export default memo(Cell)

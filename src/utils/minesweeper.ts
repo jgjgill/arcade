@@ -114,6 +114,7 @@ export const checkAroundMine = ({
         continue
       }
       if (board[injectX][injectY][2] !== 'uncheck') continue
+
       check.push([injectX, injectY])
     }
 
