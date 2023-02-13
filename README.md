@@ -20,3 +20,11 @@
 
 4. yarn dev
 ```
+
+## 구현 영상
+
+### 테트리스
+![테트리스](https://user-images.githubusercontent.com/79239852/218419942-a27f8875-c446-4b1e-906f-0d6e382b3751.gif)
+
+### 지뢰찾기
+![지뢰찾기](https://user-images.githubusercontent.com/79239852/218419038-142327ef-d2d4-4ad9-9c00-bfa1712acf27.gif)
