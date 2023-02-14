@@ -28,3 +28,9 @@
 
 ### 지뢰찾기
 ![지뢰찾기](https://user-images.githubusercontent.com/79239852/218419038-142327ef-d2d4-4ad9-9c00-bfa1712acf27.gif)
+
+# 📜개발 일지
+<a href="https://bit.ly/3hlMU1Y" target="_blank">Arcade</a>
+
+# 🚀배포
+[jgjgill.github.io/arcade](https://jgjgill.github.io/arcade/)
